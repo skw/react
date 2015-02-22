@@ -70,7 +70,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-`Parent`는 `this.props.children`라는 특수 prop으로 자식들을 읽을 수 있습니다. **`this.props.children` 는 불투명한 데이터 구조이며,** [React.Children 유틸리티](/react/docs/top-level-api.html#react.children)를 사용해 자식들을 관리합니다.
+`Parent`는 `this.props.children`라는 특수 prop으로 자식들을 읽을 수 있습니다. **`this.props.children` 는 불투명한 데이터 구조이며,** [React.Children 유틸리티](/react/docs/top-level-api-ko-KR.html#react.children)를 사용해 자식들을 관리합니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
