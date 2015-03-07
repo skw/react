@@ -123,10 +123,6 @@ title:  컴포넌트 명세와 생명주기
 다른 JavaScript 프레임워크를 연동하거나, `setTimeout`/`setInterval`로 타이머를 설정하고 AJAX 요청을 보내는 등의 작업을 이 메소드에서 합니다.
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-> v0.9 이전까지 DOM 노드가 마지막 인자로 넘어왔습니다. 이것을 사용하고 있었다면 이제는 `this.getDOMNode()`로 DOM 노드에 접근할 수 있습니다.
-***REMOVED***
-***REMOVED***
 ### 업데이트 시: componentWillReceiveProps
 ***REMOVED***
 ***REMOVED***
@@ -198,10 +194,6 @@ title:  컴포넌트 명세와 생명주기
 컴포넌트의 업데이트가 DOM에 반영된 직후에 호출됩니다. 최초 렌더링 시에는 호출되지 않습니다.
 ***REMOVED***
 컴포넌트가 업데이트된 뒤 DOM을 조작해야 하는 경우 사용할 수 있습니다.
-***REMOVED***
-***REMOVED***
-***REMOVED***
-> v0.9 이전까지 DOM 노드가 마지막 인자로 넘어왔습니다. 이것을 사용하고 있었다면 이제는 `this.getDOMNode()`로 DOM 노드에 접근할 수 있습니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
