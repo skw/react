@@ -172,25 +172,6 @@ React가 키가 있는 자식들을 비교조정할 때, React는 `key`가 있�
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-객체를 넘기는 것으로 자식에 키를 할당할 수도 있습니다. 객체 키는 각 값의 `key`로 사용될 것입니다. 하지만 JavaScript가 프로퍼티의 순서의 유지를 보장하지 않는 것을 기억해 두셔야 합니다. 실제 브라우저에서는 32비트의 양의 정수로 해석할 수 있는 프로퍼티를 **제외**하고 프로퍼티의 순서를 유지합니다. 숫자 프로퍼티는 다른 프로퍼티보다 먼저 순차정렬 됩니다. 이런 경우 React는 순서없이 컴포넌트를 렌더합니다. 키에 문자열 접두사를 붙여서 이를 막을 수 있습니다.
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
