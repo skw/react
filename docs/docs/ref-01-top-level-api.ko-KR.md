@@ -147,15 +147,6 @@ DOM에 마운트된 React 컴포넌트를 제거하고 이벤트 핸들러 및 s
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-React의 이벤트 시스템이 모바일 기기의 터치 이벤트를 처리하도록 설정합니다.
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
 `React.Children`은 불투명한 자료 구조인 `this.props.children`를 다룰 수 있는 유틸리티를 제공합니다.
 ***REMOVED***
 ***REMOVED***
