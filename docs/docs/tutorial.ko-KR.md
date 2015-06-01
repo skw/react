@@ -60,6 +60,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
 모듈화 된, 조합가능한 컴포넌트가 React의 전부입니다. 댓글상자 예제에서 우리는 다음과 같은 컴포넌트 구조를 가질 것입니다:
 ***REMOVED***
 ***REMOVED***
