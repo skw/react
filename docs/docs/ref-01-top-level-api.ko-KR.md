@@ -155,7 +155,7 @@ DOM에 마운트된 React 컴포넌트를 제거하고 이벤트 핸들러 및 s
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-`children`의 바로 밑에 있는 모든 자식에 `fn`을 호출합니다. 이 때 `this`는 `context`로 설정됩니다. `children`이 중첩된 객체나 배열일 경우 그 안의 값을 순회합니다. 따라서 `fn`에 컨테이너 객체가 넘어가는 일은 일어나지 않습니다. `children`이 `null`이거나 `undefined`면 빈 객체 대신 `null` 또는 `undefined`를 리턴합니다.
+`children`의 바로 밑에 있는 모든 자식에 `fn`을 호출합니다. 이 때 `this`는 `thisArg`로 설정됩니다. `children`이 중첩된 객체나 배열일 경우 그 안의 값을 순회합니다. 따라서 `fn`에 컨테이너 객체가 넘어가는 일은 일어나지 않습니다. `children`이 `null`이거나 `undefined`면 빈 객체 대신 `null` 또는 `undefined`를 리턴합니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
