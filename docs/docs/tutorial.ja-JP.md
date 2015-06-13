@@ -10,18 +10,23 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+* コメント全件の表示欄
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+* **コメントの先読み:** 送信したコメントをサーバに保存される前に表示させることで、アプリ動作の体感速度をアップさせます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+### 全部飛ばしてソースを見たいんだけど？
 ***REMOVED***
+[全部 GitHub にあります。](https://github.com/reactjs/react-tutorial)
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+このチュートリアルを始めるにあたっては必要ないですが、後半ではサーバに POST を投げる機能を追加します。サーバのことは良く知っていて自分でサーバを建てたいのであれば、それでも構いません。そうではないけれども、サーバサイドは考えずに React のことだけに焦点を絞って学びたい方のため、シンプルなサーバのソースコードを書いておきました。言語は JavaScript （Node.js）または Python、Ruby、Go、ないし PHP で用意してあり、すべて GitHub にあります。[ソースを見る](https://github.com/reactjs/react-tutorial/) ことも出来ますし、 [zip ファイルでダウンロード](https://github.com/reactjs/react-tutorial/archive/master.zip)することも出来ます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -42,6 +47,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+      // ここにコードが入ります
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -51,6 +57,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+> 上のコードで jQuery を読み込んでいますが、これはチュートリアル後半で ajax のコードを簡潔に書きたいだけなので、React を動かすのに必要なものでは**ありません**。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -84,6 +91,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+先程書いた JavaScript の中に、XMLに似たシンタックスがあることに気付いたでしょうか。このシンタックスシュガーは、シンプルなプリコンパイラによって次のような生の JavaScript に変換されます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -106,9 +114,13 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+先程のコードでは、とあるメソッドを持った JavaScript オブジェクトを `React.createClass()` に渡しています。これは新しい React コンポーネントを作るためです。このメソッドは `render` と呼ばれており、最終的に HTML へレンダリングされる React コンポーネントのツリーを返す点が肝になります。
 ***REMOVED***
+コードに書いた `<div>` タグは実際の DOM ノードではありません。これは React の `div` コンポーネントのインスタンスです。 これらは React が理解できるマーカーやデータの一部だと見なせます。React は **安全** です。デフォルトで XSS 対策を行っているので、HTML 文字列を生成することはありません。
 ***REMOVED***
+実際の HTML を返す必要はありません。 自分が（もしくは他の誰かが）組み立てたコンポーネントツリーを返せばいいのです。 これこそ React が **composable**な（組み立てられる）ものである理由であり、この大事なルールを守ればフロントエンドはメンテナンスしやすいものとなります。
 ***REMOVED***
+`React.render()` はまずルートコンポーネントのインスタンスを作り、フレームワークを立ち上げます。そして、第2引数で与えられた実際の DOM 要素にマークアップを挿入します。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -154,6 +166,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+ここで、HTML タグと組み立てているコンポーネントが、どのようにミックスされているかを確認しましょう。 HTML コンポーネントは既定の React コンポーネントですが、自分で定義したもの同士はそれぞれ別物になります。JSX コンパイラは HTML タグを自動的に `React.createElement(tagName)` の式に書き換え、それぞれを別々のものに変換します。これはグローバルの名前空間が汚染させるのを防ぐためです。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -175,9 +188,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+JSX の内側で（属性値または子要素として）JavaScript の式を波括弧で囲むと、テキストや React コンポーネントをツリーに加えることが出来ます。コンポーネントに渡された属性値には名前が付けられており、`this.props` をキーとしてアクセスできます。また、ネストされた子要素の値は `this.props.children` でアクセスが可能です。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+さて、これまでに `Comment` コンポーネントを定義しました。これからこのコンポーネントに、コメントの著者名と内容を渡せるようにします。これを実装することで、それぞれ別のコメントに対して同じコードを使い回せるようになります。それでは早速 `CommentList` の中にコメントを追加していきましょう。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -199,6 +214,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+まず最初に、サードパーティ製の **Showdown** ライブラリをアプリケーションに追加します。 Showdown は Markdown テキストを生の HTML に変換する JavaScript ライブラリです。 既にある head タグの内側に script タグを書き込み、以下のように Showdown を読み込ませます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -230,6 +246,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+このコードでは Showdown のライブラリを呼び出すことしかしていません。`this.props.children` は React によってラップされたテキストですが、これを Showdown が理解できる生の文字列に変換する必要があります。そのため、上のコードでは明示的に `toString()` を呼び出しているのです。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -253,7 +270,9 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+これは特別な API であり、生の HTML が挿入されにくくなるよう意図的に作ったものです。しかし、ここでは Showdown のためにこのバックドアを利用しています。
 ***REMOVED***
+**注意:** この機能を使うことで、Showdown は安全なものと信頼することになります。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -267,6 +286,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+このデータはモジュールを使って `CommentList` に取り込む必要があります。`CommentBox` の `React.render()` の部分を手直しして、props を通してデータが `CommentList` へ渡るようにしましょう。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -328,8 +348,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+これまで、それぞれのコンポーネントは自身の props の値を用いて、一度だけレンダリングしていました。`props` はイミュータブルです。つまり、props は親から渡されますが、同時に props は親の「所有物」なのです。データが相互にやり取りされるのを実現するため、ここでミュータブルな **state**（状態）をコンポーネントに取り入れましょう。コンポーネントは `this.state` というプライベートな値を持ち、`this.setState()` を呼び出すことで state を更新することが出来ます。コンポーネントの state が更新されれば、そのコンポーネントは自身を再びレンダリングし直します。
 ***REMOVED***
+`render()` メソッドは `this.props` や `this.state` と同じく宣言的に書かれています。このフレームワークによって、UI と入力が常に一致するようになります。
 ***REMOVED***
+サーバがデータを集めてくれば、今あるコメントのデータを更新することになるかもしれません。state を表すコメントのデータの配列を `CommentBox` コンポーネントに加えましょう。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -349,6 +372,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+`getInitialState()` メソッドはコンポーネントのライフサイクル内で一回だけ実行され、コンポーネントの state における初期値を設定します。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -363,6 +387,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+注意: ここからは AJAX アプリケーションを作っていくので、自分のファイルシステム上ではなく Web サーバを使ってアプリを作る必要があります。残りのチュートリアルに必要な機能は [冒頭で紹介した](#running-a-server) サーバに含まれています。ソースコードは [GitHub に](https://github.com/reactjs/react-tutorial/)用意してあります。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -395,6 +420,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+さて、`componentDidMount` はコンポーネントがレンダリングされたときに React が自動的に呼び出すメソッドです。動的な更新の鍵となるのは `this.setState()` の呼び出し方です。ここでは、古いコメントの配列をサーバから取ってきた新しい配列に置き換え、UI を自動的に更新させてみましょう。このような reactivity（反応性・柔軟性）のおかげで、リアルタイム更新を最小限にすることが出来ます。次のコードではシンプルなポーリングをしていますが、WebSockets や他の方法でも簡単に実現できます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -437,9 +463,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+ここまでに、AJAX を呼び出す部分を別のメソッド内に移動させました。加えて、コンポーネントが最初に読み込まれてから2秒ごとに AJAX のメソッドが呼び出されるようにしました。ぜひ自分のブラウザで実行させて、`comments.json` ファイルに変更を加えてみてください。2秒以内に表示が更新されるはずです！
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+いよいよフォームを作る段階に来ました。ここで `CommentForm` コンポーネントは、ユーザに自分の名前とコメントの内容を入力させ、コメントを保存させるためにサーバへリクエストを送る役割を果たすことになります。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -487,15 +515,19 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+React がコンポーネントにイベントハンドラを登録する際は camelCase の命名規則に従います。上のコードではフォームに `onSubmit` ハンドラを登録し、フォームから妥当な入力が送信されたらフォームをクリアするようになっています。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+先程のコードでは `ref` 属性値を使って子のコンポーネントに名前を付けており、`this.ref` でそのコンポーネントを参照しています。`React.findDOMNode(component)` にコンポーネントを指定して呼び出すことで、ブラウザの持つ実際の DOM 要素を取得することが出来ます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+ユーザがコメントを送信したら、コメントリストをリフレッシュして新しいリストを読み込むことになります。コメントリストを表す state を保持しているのは `CommentBox` なので、必要なロジックは `CommentBox` の中に書くのが筋でしょう。
 ***REMOVED***
+ここでは子のコンポーネントから親に向かって、いつもとは逆方向にデータを返す必要があります。まず、親のコンポーネントに新しいコールバック関数（`handleCommentSubmit`）を定義します。続いて `render` メソッド内にある子のコンポーネントにコールバックを渡すことで、`onCommentSubmit` イベントとコールバックを結び付けています。こうすることで、イベントが発生するたびにコールバックが呼び出されます。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -615,41 +647,9 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+### 最適化: 先読み更新
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+アプリケーションに必要な機能は一通り実装できました。しかし、フォームからコメントを送信しても、サーバからのレスポンスが来るまで自分のコメントはリストに載らないため、アプリの動作は遅く感じます。ここでは、送信したコメントをリストに先読みさせて、アプリの体感速度をアップさせましょう。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
