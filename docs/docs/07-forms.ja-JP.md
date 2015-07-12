@@ -6,10 +6,13 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+`<input>` や `<textarea>` や `<option>` のようなフォームのコンポーネントはユーザの入力によって変化しうるので、他のネイティブのコンポーネントとは異なります。以下のコンポーネントは、ユーザの入力に返答することにおいて、フォームを操作することを簡単にするインターフェースを提供します。
 ***REMOVED***
+`<form>` のイベントについての情報は、[フォームのイベント](/react/docs/events.html#form-events)をご覧ください。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+以下のように、フォームのコンポーネントはユーザの入力に影響されるいくつかのpropsをサポートしています。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -17,11 +20,13 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+フォームコンポーネントは `onChange` propにコールバックをセットすることで変更を検知することを可能にします。`onChange` propはブラウザ上で、ユーザの入力に返答する際に発火するために動きます。それは以下のようなタイミングです。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+全てのDOMのイベントのように、 `onChange` propは全てのネイティブのコンポーネントにサポートされており、何度も発生するチェンジイベントを検知するのに使われることもあります。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -51,6 +56,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+この例では、ユーザから提供された、最新の値を単純に受け入れ `<input>` コンポーネントの `value` propを更新します。 このパターンはユーザの入力に返答したり、バリデーションしたりするインターフェースを実行することを簡単にします。例えば、
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -58,6 +64,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+上記はユーザのinputを受け入れますが、値を最初の140字に切り取ります。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -105,6 +112,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+このメソッドがいつでもビューを描画するので、次のテキストの入力の値は *常に* `Untitled` になります。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -116,6 +124,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+HTMLでは、開発者は簡単に複数行に渡る値を提供できます。しかし、ReactがJavaScriptであるので、文字列の制限を私たちは持っておらず、改行をしたい場合は `\n` を使えます。 `value` と `defaultValue` を私たちが持っている世界では、子要素が果たす役割は曖昧になっています。この理由から、以下のように `<textarea>` の値をセットする際には子要素を使うべきではありません。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -138,13 +147,4 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+> 配列を `value` 属性の中に渡すことができます。これで、以下のように、 `select` タグの中で複数のオプションを選択することができます。 `<select multiple={true} value={['B', 'C']}>`
