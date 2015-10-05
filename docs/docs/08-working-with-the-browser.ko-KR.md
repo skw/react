@@ -20,7 +20,7 @@ React는 DOM을 직접 다루지 않기 때문에 굉장히 빠릅니다. React�
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-브라우저와 상호 작용하려면 DOM 노드에 대한 참조가 필요합니다. React는 `React.findDOMNode(component)` 함수를 갖고 있으며, 이를 통해서 컴포넌트의 DOM 노드의 참조를 얻을 수 있습니다.
+브라우저와 상호 작용하려면 DOM 노드에 대한 참조가 필요합니다. React는 `ReactDOM.findDOMNode(component)` 함수를 갖고 있으며, 이를 통해서 컴포넌트의 DOM 노드의 참조를 얻을 수 있습니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
