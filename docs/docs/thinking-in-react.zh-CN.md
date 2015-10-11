@@ -44,8 +44,8 @@
 ***REMOVED***
 ***REMOVED***
   1. **`FilterableProductTable` (orange):** 包含示例的整体
-  2. **`SearchBar` (blue):**  接受所有 *用户输入*  
-  3. **`ProductTable` (green):** 基于 *用户输入* 显示和过滤 *数据集合(data collection)*  
+  2. **`SearchBar` (blue):**  接受所有 *用户输入*
+  3. **`ProductTable` (green):** 基于 *用户输入* 显示和过滤 *数据集合(data collection)*
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -86,7 +86,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-  * 用户输入的搜索文本 
+  * 用户输入的搜索文本
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
