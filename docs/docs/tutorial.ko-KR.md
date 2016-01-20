@@ -26,7 +26,13 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-이 튜토리얼을 시작할 때 필요한 건 아니지만, 나중에 실행 중인 서버에 `POST` 요청을 하는 기능을 추가하게 될 것입니다. 서버를 구성하는 것이 익숙하다면, 본인이 편한 방식대로 서버를 구성해 주세요. 서버사이드에 대한 고민없이 React의 학습 그 자체에 집중하고 싶은 분들을 위해서, 몇 가지 언어로 간단한 서버코드를 작성해 놓았습니다 - JavaScript (Node.js), Python, Ruby, Go, PHP 버전이 있고, GitHub에서 찾아보실 수 있습니다. [소스를 확인](https://github.com/reactjs/react-tutorial/)하거나 [zip 파일을 다운로드](https://github.com/reactjs/react-tutorial/archive/master.zip)하고 시작하세요.
+***REMOVED***
+***REMOVED***
+단순하게 하기위해, 서버는 `JSON` 파일을 데이터베이스로 사용합니다. 프로덕션에서 사용할 수는 없지만 이렇게 하면 API를 사용할 때 시뮬레이션이 단순해집니다. 서버가 시작되면, API 엔드포인트를 제공하고 필요한 정적 페이지를 서빙합니다.
+***REMOVED***
+***REMOVED***
+***REMOVED***
+이 튜토리얼에서는 가능한한 간단하게 만들겠습니다. 위에서 언급된 서버 패키지에 우리가 작업할 HTML 파일 포함되어 있습니다. 편한 편집기에서 `public/index.html`를 여세요. 이는 이런 내용이어야 합니다.(아마 조금 다를 수 있습니다만, 여기에 나중에 `<script>` 태그를 추가 할 것입니다.)
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -51,8 +57,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-***REMOVED***
+다음 진행을 위해, 위의 스크립트 태그안에 JavaScript 코드를 작성합니다. (이 튜토리얼에서는) 진보된 라이브 리로드가 없기 때문에, 수정 사항을 저장한 다음에는 브라우저를 새로고침해서 확인해야 합니다. 서버를 시작한 다음 브라우저에서 `http://localhost:3000`를 열어 따라해 보세요. 아무런 수정도 하지 않았다면, 최초 로드시 우리가 만들 제품의 완성품을 확인할 수 있을 것입니다. 작업할 준비가 되면, 이전의 `<script>` 태그를 삭제하고 진행하세요.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -121,11 +126,13 @@ JavsScript 안의 유사 XML 구문이 먼저 눈에 띌 것입니다. 우리에
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-`React.render()`는 최상위 컴포넌트의 인스턴스를 만들고, 두 번째 인수로 전달받은 DOM 엘리먼트에 마크업을 삽입해 프레임워크를 시작합니다.
+`ReactDOM.render()`는 최상위 컴포넌트의 인스턴스를 만들고, 두 번째 인수로 전달받은 DOM 엘리먼트에 마크업을 삽입해 프레임워크를 시작합니다.
+***REMOVED***
+`ReactDOM` 모듈은 DOM 특정 메소드를 노출해, `React`가 코어 툴을 다른 플렛폼(예를 들어, [React Native](http://facebook.github.io/react-native/))에 공유할 수 있게 합니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-이제 `CommentList`와 `CommentForm`을 위한 뼈대를 구축해 봅시다. 이전과 마찬가지로 단순히 `<div>` 태그 하나 입니다.
+이제 `CommentList`와 `CommentForm`을 위한 뼈대를 구축해 봅시다. 이전과 마찬가지로 단순히 `<div>` 태그 하나 입니다. 파일에 두 컴포넌트를 추가해, 이미 있는 `CommentBox` 선언을 참고로 `ReactDOM.render`를 호출합시다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -229,6 +236,8 @@ Markdown은 텍스트를 포맷팅하는 간단한 방식입니다. 예를 들�
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
 다음은, 댓글 텍스트를 Markdown으로 전환하고 출력해 봅시다.
 ***REMOVED***
 ***REMOVED***
@@ -250,6 +259,10 @@ Markdown은 텍스트를 포맷팅하는 간단한 방식입니다. 예를 들�
 우리가 한 일이라고는 marked 라이브러리를 호출한 것 뿐입니다. marked가 `this.props.children`에서 텍스트를 읽어들여 처리할 수 있도록 React 형식의 텍스트(React's wrapped text)를 단순 텍스트(raw string)으로 전환하기 위해 명시적으로 `toString()`을 호출했습니다.
 ***REMOVED***
 하지만 여기엔 문제가 있습니다! 우리는 HTML 태그들이 정상적으로 렌더되길 원하지만 브라우저에 출력된 결과물은 "`<p>``<em>`또 다른`</em>` 댓글입니다`</p>`"처럼 태그가 그대로 보일것입니다.
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -348,6 +361,8 @@ Markdown은 텍스트를 포맷팅하는 간단한 방식입니다. 예를 들�
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
 지금까지, 각각의 컴포넌트는 props를 기반으로 한번 렌더되었습니다. `props`는 불변성을 갖습니다: 그것들은 부모에서 전달되어 부모에게 "소유" 되어 있습니다. 컴포넌트에 상호작용을 구현하기 위해서, 가변성을 갖는 **state**를 소개합니다. `this.state`는 컴포넌트에 한정(private)되며 `this.setState()`를 통해 변경할 수 있습니다. state가 업데이트 되면, 컴포넌트는 자신을 스스로 다시 렌더링합니다.
 ***REMOVED***
 `render()` 메소드는 `this.props`와 `this.state`를 위한 함수로 선언적으로 작성됩니다. 프레임워크에서 입력값에 따른 UI가 항상 일관성 있음을 보장해줍니다.
@@ -376,8 +391,7 @@ Markdown은 텍스트를 포맷팅하는 간단한 방식입니다. 예를 들�
 ***REMOVED***
 ### state 업데이트하기
 ***REMOVED***
-컴포넌트의 최초 생성 시에, 서버에서 GET 방식으로 JSON을 넘겨받아 최신의 데이터가 state에 반영되길 원했습니다. 실제 애플리케이션에선 이것이 동적인 엔드포인트이지만, 이 예제에서는 정적 JSON 파일을 사용해서 간단하게 만들어보겠습니다.
-***REMOVED***
+컴포넌트의 최초 생성 시에, 서버에서 GET 방식으로 JSON을 넘겨받아 최신의 데이터가 state에 반영되길 원했습니다. jQuery를 사용해 서버에 비동기 요청을 만들어 필요한 데이터를 빨리 가져올 수 있게 하겠습니다. 이런 식입니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -385,10 +399,6 @@ Markdown은 텍스트를 포맷팅하는 간단한 방식입니다. 예를 들�
   {"author": "Jordan Walke", "text": "*또 다른* 댓글입니다"}
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-주의: 우리의 앱이 AJAX 애플리케이션으로 변화하고 있기 때문에, 이제 파일 시스템의 파일을 참조하는 대신 웹서버를 사용하도록 앱을 개발해야 합니다. [위에서 언급한 바와 같이](#running-a-server), 우리는 튜토리얼의 나머지 부분에 필요한 기능을 제공하는 서버를 몇 가지 준비해 놓았습니다. [GitHub에 올려놓았으니](https://github.com/reactjs/react-tutorial) 확인해 보세요.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -464,7 +474,7 @@ Markdown은 텍스트를 포맷팅하는 간단한 방식입니다. 예를 들�
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-우리가 여기서 한것은 AJAX 호출을 별도의 메소드로 분리하고 컴포넌트가 처음 로드된 시점부터 2초 간격으로 계속 호출되도록 한 것입니다. 브라우저에서 직접 돌려보고 `comments.json`파일을 수정해보세요; 2초 간격으로 변화되는 모습이 보일 것입니다!
+우리가 여기서 한것은 AJAX 호출을 별도의 메소드로 분리하고 컴포넌트가 처음 로드된 시점부터 2초 간격으로 계속 호출되도록 한 것입니다. 브라우저에서 직접 돌려보고 `comments.json` 파일(서버의 같은 디렉토리에 있습니다)을 수정해보세요. 2초 간격으로 변화되는 모습이 보일 것입니다!
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -522,7 +532,7 @@ React는 카멜케이스 네이밍 컨벤션으로 컴포넌트에 이벤트 핸
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
+자식 컴포넌트의 이름을 지정하기 위해 `ref` 어트리뷰트를, DOM 노드를 참조하기 위해 `this.refs`를 사용합니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -651,6 +661,7 @@ React는 카멜케이스 네이밍 컨벤션으로 컴포넌트에 이벤트 핸
 ### 최적화: 낙관적 업데이트
 ***REMOVED***
 우리의 애플리케이션은 이제 모든 기능을 갖추었습니다. 하지만 댓글이 목록에 업데이트되기 전에 완료요청을 기다리는 게 조금 느린듯한 느낌이 드네요. 우리는 낙관적 업데이트를 통해 댓글이 목록에 추가되도록 함으로써 앱이 좀 더 빨라진 것처럼 느껴지도록 할 수 있습니다.
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***

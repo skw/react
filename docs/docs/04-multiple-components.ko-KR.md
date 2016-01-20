@@ -10,7 +10,6 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
 명확히 정의된 인터페이스와 다른 컴포넌트를 재사용해 모듈러 컴포넌트를 구축하면, 함수와 클래스를 이용했을 때 얻을 수 있는 이점 대부분을 얻을 수 있습니다. 특히 앱에서 *다른 관심을 분리*할 수 있습니다.아무리 간단히 새 컴포넌트를 만들었다고 해도 말이죠. 당신의 애플리케이션에서 쓸 커스텀 컴포넌트 라이브러리를 만들어서, 당신의 도메인에 최적화된 방법으로 UI를 표현할 수 있게 됩니다.
 ***REMOVED***
 ***REMOVED***
@@ -55,9 +54,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-위의 예제에서, `Avatar` 인스턴스는  `ProfilePic`과 `ProfileLink`인스턴스를 *가지고* 있습니다. React에서 **소유자는 다른 컴포넌트의 `props`를 설정하는 컴포넌트입니다**. 더 정식으로 말하면, `X` 컴포넌트가 `Y` 컴포넌트의 `render()` 메소드 안에서 만들어졌다면, `Y`가 `X`를 *소유하고* 있다고 합니다. 앞에서 설명한 바와 같이, 컴포넌트는 자신의 `props`를 변경할 수 없습니다. `props`는 언제나 소유자가 설정한 것과 일치합니다. 이와 같은 중요한 성질은 UI가 일관성 있도록 해줍니다.
+위의 예제에서, `Avatar` 인스턴스는  `ProfilePic`과 `ProfileLink`인스턴스를 *가지고* 있습니다. React에서 **소유자는 다른 컴포넌트의 `props`를 설정하는 컴포넌트입니다**. 더 정식으로 말하면, `X` 컴포넌트가 `Y` 컴포넌트의 `render()` 메소드 안에서 만들어졌다면, `Y`가 `X`를 *소유하고* 있다고 합니다. 앞에서 설명한 바와 같이, 컴포넌트는 자신의 `props`를 변경할 수 없습니다. `props`는 언제나 소유자가 설정한 것과 일치합니다. 이와 같은 근본적인 불변성은 UI가 일관성 있도록 해줍니다.
 ***REMOVED***
 소유(owner-ownee)관계와 부모·자식 관계를 구별하는 것은 중요합니다. 부모·자식 관계가 DOM에서부터 쓰던 익숙하고 이미 알고있던 단순한 것인 한편, 소유관계는 React 고유의 것입니다.  위의 예제에서, `Avatar`는 `div`, `ProfilePic`, `ProfileLink`인스턴스를 소유하고, `div`는 `ProfilePic`과 `ProfileLink`인스턴스의 (소유자가 아닌) **부모**입니다.
 ***REMOVED***
@@ -69,9 +66,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
 `Parent`는 `this.props.children`라는 특수 prop으로 자식들을 읽을 수 있습니다. **`this.props.children` 는 불투명한 데이터 구조이며,** [React.Children 유틸리티](/react/docs/top-level-api-ko-KR.html#react.children)를 사용해 자식들을 관리합니다.
-***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -90,8 +85,6 @@
 ***REMOVED***
 ***REMOVED***
 직관적으로 보면, `<p>Paragraph 1</p>`가 없어졌습니다만 그러는 대신에, React는 첫 번째 자식의 텍스트를 비교조정하고 마지막 자식을 파괴하도록 DOM을 비교조정할 것입니다. React는 자식들의 *순서*에 따라 비교조정합니다.
-***REMOVED***
-***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -176,8 +169,8 @@ React가 키가 있는 자식들을 비교조정할 때, React는 `key`가 있�
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-React에서 데이터는 위에서 말한 것처럼 `props`를 통해 소유자로부터 소유한 컴포넌트로 흐릅니다. 이것은 사실상 단방향 데이터 바인딩입니다. 소유자는 `props`나 `state`를 기준으로 계산한 어떤 값으로 소유한 컴포넌트의 props를 바인드합니다. 이 과정은 재귀적으로 발생하므로, 데이터의 변경은 자동으로 모든 곳에 반영됩니다.
 ***REMOVED***
+React에서 데이터는 위에서 말한 것처럼 `props`를 통해 소유자로부터 소유한 컴포넌트로 흐릅니다. 이것은 사실상 단방향 데이터 바인딩입니다. 소유자는 `props`나 `state`를 기준으로 계산한 어떤 값으로 소유한 컴포넌트의 props를 바인드합니다. 이 과정은 재귀적으로 발생하므로, 데이터의 변경은 자동으로 모든 곳에 반영됩니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
