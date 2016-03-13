@@ -16,17 +16,22 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+* **实时更新：** 其他用户的评论被实时浮现到评论中。
 ***REMOVED***
 ***REMOVED***
+### 想要跳过所有内容，只查看源代码？
 ***REMOVED***
+[全在 GitHub .](https://github.com/reactjs/react-tutorial)
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+为了开始本教程，我们将要需要一个运行着的服务器。这将是我们纯粹用来获取和保存数据的伺服终端。为了让这尽可能的容易，我们已经用许多不同的语言编写了简单的服务器，它正好完成我们需要的事。    **你可以[查看源代码](https://github.com/reactjs/react-tutorial/) 或者 [下载 zip 文件](https://github.com/reactjs/react-tutorial/archive/master.zip) 包括了所有你开始学习需要的东西**
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+对于此教程,我们将使它尽可能的容易。被包括在上面讨论的服务器包里的是一个我们将在其中工作的 HTML 文件。在你最喜欢的编辑器里打开 `public/index.html`。它应该看起来像这样 （可能有一些小的不同，稍后我们将添加一个额外的 `<script>` 标签）：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -52,12 +57,15 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+在本教程剩余的部分，我们将在此 script 标签中编写我们的 JavaScript 代码。我们没有任何高级的实时加载所以在保存以后你需要刷新你的浏览器来观察更新。通过在浏览器打开 `http://localhost:3000` 关注你的进展。当你没有任何修改第一次加载时，你将看到我们将要准备建立的已经完成的产品。当你准备开始工作，请删除前面的 `<script>` 标签然后你就可以继续了。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+> 我们在这里引入 jQuery 是因为我们想简化我们未来的 ajax 请求，但这对React的正常工作 **不是** 必要的。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+React 中都是关于模块化、可组装的组件。以我们的评论框为例，我们将有如下的组件结构：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -66,6 +74,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+让我们构造 `CommentBox` 组件，仅是一个简单的 `<div>` ：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -84,9 +93,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+注意原生的HTML元素以小写开头，而制定的 React 类以大写开头。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+首先你会注意到你的 JavaScript 中 XML 式的语法。我们有一个简单的预编译器，将语法糖转换成这种纯的JavaScript：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -105,14 +116,19 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+它的使用是可选的，但是我们发现 JSX 语法比单纯的 JavaScript 更加容易使用。阅读更多关于[JSX 语法的文章](/react/docs/jsx-in-depth-zh-CN.html)。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+这个 `<div>` 标签不是真实的DOM节点；他们是 React `div` 组件的实例化。你可以把这些看做是React知道如何处理的标记或者是一些数据 。React 是**安全的**。我们不生成 HTML 字符串，因此XSS防护是默认特性。
 ***REMOVED***
+你没有必要返回基本的 HTML。你可以返回一个你（或者其他人）创建的组件树。这就使 React **组件化**：一个可维护前端的关键原则。
 ***REMOVED***
+`ReactDOM.render()` 实例化根组件，启动框架，注入标记到原始的 DOM 元素中，作为第二个参数提供。
 ***REMOVED***
+`ReactDOM` 模块暴露了 DOM 相关的方法， 而 `React` 保有被不同平台的 React 共享的核心工具 （例如 [React Native](http://facebook.github.io/react-native/)）。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -160,6 +176,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+注意我们是如何混合 HTML 标签和我们建立的组件。HTML 组件是正常的 React 组件，就和你定义的一样，只有一个区别。JSX 编译器会自动重写 HTML 标签为 `React.createElement(tagName)` 表达式，其它什么都不做。这是为了避免污染全局命名空间。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -181,9 +198,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+在 JSX 中,通过将 JavaScript 表达式放在大括号中（作为属性或者子节点）,你可以把文本或者 React 组件放置到树中。我们以 `this.props` 的 keys 访问传递给组件的命名属性，以 `this.props.children` 访问任何嵌套的元素。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+既然我们已经定义了 `Comment` 组件，我们将要传递作者名和评论文字给它。这允许我们为每个评论重用相同的代码。现在让我们在我们的 `CommentList` 里添加一些评论。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -203,7 +222,9 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+Markdown 是一种简单的内联格式化你的文字的方法。例如，用星号包围文本将会使其强调突出。
 ***REMOVED***
+在本教程中我们使用第三方库 **marked**，它接受 Markdown 文本并且转换为原始的 HTML。我们已经在初始的页面标记里包含了这个库，所以我们可以直接开始使用它，让我们转换评论文本为 Markdown 并输出它：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -221,9 +242,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+我们在这里唯一做的就是调用 marked 库。我们需要把 从 React 的包裹文本来的 `this.props.children` 转换成 marked 能理解的原始字符串，所以我们显示地调用了`toString()`。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+那是 React 在保护你免受 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。有一个方法解决这个问题，但是框架会警告你别使用这种方法：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -246,10 +269,13 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+这是一个特殊的 API，故意让插入原始的 HTML 变得困难，但是对于 marked 我们将利用这个后门。
 ***REMOVED***
+**记住：** 使用这个功能你会依赖于 marked 是安全的。既然如此，我们传递 `sanitize: true` 告诉 marked escape 源码里任何的 HTML 标记，而不是直接不变的让他们通过。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+到目前为止我们已经完成了在源码里直接插入评论。作为替代，让我们渲染一团 JSON 数据到评论列表里。最终数据将会来自服务器，但是现在，写在你的源代码中：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -259,6 +285,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+我们需要以一种模块化的方式将这个数据传入到 `CommentList`。修改 `CommentBox` 和 `ReactDOM.render()` 方法，以便于通过 props 传入数据到 `CommentList`：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -316,6 +343,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+这个组件不同于和前面的组件，因为它必须重新渲染自己。该组件将不会有任何数据，直到请求从服务器返回，此时该组件或许需要渲染一些新的评论。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -323,6 +351,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+`render()` 方法被声明为一个带有 `this.props` 和 `this.state` 的函数。框架保证了 UI 总是与输入一致。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -347,6 +376,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+当组件第一次创建时，我们想从服务器获取一些 JSON 并且更新状态以反映最新的数据。我们将用 jQuery 来发送一个异步请求到我们刚才启动的服务器以获取我们需要的数据。这些数据已经被包含在了你已启动的服务器里（基于`comments.json`文件），所以一旦被获取，`this.state.data` 会看起来像这样：
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -386,6 +416,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+这里， `componentDidMount` 是一个当组件被渲染时被Ｒeact自动调用的方法。动态更新的关键是对 `this.setState()` 的调用。我们用新的从服务器来的替换掉旧的评论组，然后UI自动更新自己。因为这种反应性，仅是一个微小的变化就添加了实时更新。我们这里将用简单的轮询，但是你可以容易的使用 WebSockets 或者其他技术。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -428,6 +459,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+我们在这里做的全部事情是把 AJAX 调用移动到独立的方法里，然后在组件第一次加载时及其后每2秒 调用它。试着在你的浏览器里运行它并且改变 `comments.json` 文件（在你的服务器的相同目录）；2秒内，变化将会显现！
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -450,7 +482,9 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+对于传统的 DOM， `input` 元素被渲染并且浏览器管理它的状态（它的渲染值）。结果是，DOM的实际值会和组件不同。这是不理想的，因为视图的值会和组件的值不同。在React中，组件应该总是表示视图的值而不只是在初始化时。
 ***REMOVED***
+因此，我们将使用 `this.state` 来在用户输入时保存输入。我们定义一个初始 `state`，它带有 `author` 和 `text` 两个属性并将他们设置为空字符串。在我们的 `<input>` 元素里，我们设置 `value` prop 来反映组件的 `state` 并给他们附加 `onChange` 事件处理。这些带有设置了 `value` 的  `<input>` 元素被称为受控组件。更多关于受控组件请阅读 [Forms article](/react/docs/forms.html#controlled-components)。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -488,9 +522,11 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+React使用小驼峰命名规范(camelCase)给组件绑定事件处理器。我们附加 `onChange` 给两个 `<input>` 元素。现在，当用户输入文本到 `<input>` 中，被附加的 `onChange` 回调函数被激发并且组件的 `state` 被修改。然后，被渲染的 `input` 元素的值将会更新以反映当前组件的 `state`。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+让我们使表单具有交互性。当用户提交表单时，我们应该清除它，提交一个请求到服务器，并刷新评论列表。让我们监听表单的提交事件并清除它。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -536,11 +572,13 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+我们给表单绑定一个`onSubmit`处理器，它在表单提交了合法的输入后清空表单字段。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+当用户提交评论时，我们需要刷新评论列表来包含这条新评论。在`CommentBox`中完成所有逻辑是有道理的，因为`CommentBox` 拥有代表了评论列表的状态(state)。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -681,6 +719,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+我们的应用现在已经功能完备，但是它感觉很慢，因为在评论出现在列表前必须等待请求完成。我们可以优化添加这条评论到列表以使应用感觉更快。
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -713,3 +752,32 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+你刚刚通过几个简单的步骤建立了一个评论框。学习更多关于[为什么使用 React](/react/docs/why-react-zh-CN.html), 或者深入 [API 参考](/react/docs/top-level-api.html) 开始钻研！祝你好运！
