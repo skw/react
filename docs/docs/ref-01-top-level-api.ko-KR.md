@@ -17,7 +17,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-ES6 클래스 구문을 사용해 React 컴포넌트를 정의했을 때 기본 클래스가 되는 부분입니다. 어떻게 ES6 클래스 구문을 사용해 React를 다루는지는 [재사용가능한 컴포넌트](/react/docs/reusable-components-ko-KR.html#es6-classes)를 확인하세요. 기본 클래스에서 실제 제공되는 메소드들에는 어떤것이 있는지 알아보려면 [컴포넌트 API](/react/docs/component-api-ko-KR.html)를 확인하세요.
+ES6 클래스 구문을 사용해 React 컴포넌트를 정의했을 때 기본 클래스가 되는 부분입니다. 어떻게 ES6 클래스 구문을 사용해 React를 다루는지는 [재사용가능한 컴포넌트](/react/docs/reusable-components-ko-KR.html#es6-클래스)를 확인하세요. 기본 클래스에서 실제 제공되는 메소드들에는 어떤것이 있는지 알아보려면 [컴포넌트 API](/react/docs/component-api-ko-KR.html)를 확인하세요.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -129,7 +129,7 @@ ES6 클래스 구문을 사용해 React 컴포넌트를 정의했을 때 기본 
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-불투명한 자료구조인 `children`를 개별 자식마다 키를 할당해 평면 배열로 리턴합니다. 이는 render 메소드 내에서 자식의 컬렉션을 조작할 때, 특히 `this.props.children`을 넘기기 전에 재정렬하거나 재단할 때 유용합니다.   
+불투명한 자료구조인 `children`를 개별 자식마다 키를 할당해 평면 배열로 리턴합니다. 이는 render 메소드 내에서 자식의 컬렉션을 조작할 때, 특히 `this.props.children`을 넘기기 전에 재정렬하거나 재단할 때 유용합니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -178,7 +178,7 @@ DOM에 마운트된 React 컴포넌트를 제거하고 이벤트 핸들러 및 s
 ***REMOVED***
 > `findDOMNode()`는 기본 DOM 노드에 접근하기 위한 출구입니다. 컴포넌트 추상화를 파괴하기 때문에 대부분의 경우 이것의 사용은 권장되지 않습니다.
 ***REMOVED***
-> `findDOMNode()`는 마운트된 컴포넌트에서만 작동합니다. 이는 컴포넌트가 DOM에 위치해야 함을 뜻합니다. 만약 아직 생성되기전의 컴포넌트에서 `render()`에서 `findDOMNode()`를 호출하는 등 컴포넌트가 마운트 되기 이전에 이를 호출한다면, 예외가 던져질 것입니다.  
+> `findDOMNode()`는 마운트된 컴포넌트에서만 작동합니다. 이는 컴포넌트가 DOM에 위치해야 함을 뜻합니다. 만약 아직 생성되기전의 컴포넌트에서 `render()`에서 `findDOMNode()`를 호출하는 등 컴포넌트가 마운트 되기 이전에 이를 호출한다면, 예외가 던져질 것입니다.
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
